@@ -10,6 +10,10 @@ export interface AppConfig extends Partial<AutocaptureConfig> {
     showLandmarks: boolean;
     showBoundingBox: boolean;
     showFaceGuide: 'oval' | 'face';
+    devConfig? : {
+        showPerformance?: boolean;
+    }
+    
 }
 
 export const defaultConfig: AppConfig = {
@@ -22,4 +26,7 @@ export const defaultConfig: AppConfig = {
     showLandmarks: false,
     showBoundingBox: false,
     showFaceGuide: 'oval',
+    devConfig: {
+        showPerformance: true,
+    }
 };
