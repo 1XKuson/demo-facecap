@@ -14,6 +14,7 @@ export interface AppConfig extends Partial<AutocaptureConfig> {
         showPerformance?: boolean;
     }
     
+    
 }
 
 export const defaultConfig: AppConfig = {
@@ -28,5 +29,6 @@ export const defaultConfig: AppConfig = {
     showFaceGuide: 'oval',
     devConfig: {
         showPerformance: true,
-    }
+    },
+    minFaceAreaRatio: 0.4
 };
