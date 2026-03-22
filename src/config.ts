@@ -18,12 +18,12 @@ export interface AppConfig extends Partial<AutocaptureConfig> {
 }
 
 export const defaultConfig: AppConfig = {
-    captureCount: 3,
-    stableFramesRequired: 5,
+    captureCount: 7,
+    stableFramesRequired: 3,
     minConfidence: 0.75,
-    maxYawAngle: 15,
-    maxPitchAngle: 15,
-    maxRollAngle: 15,
+    maxYawAngle: 20,
+    maxPitchAngle: 20,
+    maxRollAngle: 20,
     showLandmarks: false,
     showBoundingBox: false,
     showFaceGuide: 'oval',
