@@ -7,48 +7,48 @@ const PREP_STEPS = [
 
 export default function GuidePage({ onStart, totalCaptures }: { onStart: () => void; totalCaptures: number }) {
     return (
-        <div className="w-full flex flex-col items-center">
+        <div className="flex w-full flex-col items-center">
             {/* Visualizer Animation */}
-            <div className="relative w-32 h-40 mb-8 mt-2">
-                <div className="absolute inset-0 border-[3px] border-zinc-200 rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
+            <div className="relative mb-8 mt-2 h-40 w-32">
+                <div className="absolute inset-0 overflow-hidden rounded-3xl border-[3px] border-zinc-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                     {/* Dashed Oval Guide */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72px] h-[92px] border-2 border-dashed border-zinc-300 rounded-[100px]" />
+                    <div className="absolute left-1/2 top-1/2 h-[92px] w-[72px] -translate-x-1/2 -translate-y-1/2 rounded-[100px] border-2 border-dashed border-zinc-300" />
 
                     {/* Abstract Face Shape */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-[76px] bg-zinc-100 rounded-[100px] flex flex-col items-center pt-5 gap-3">
+                    <div className="absolute left-1/2 top-1/2 flex h-[76px] w-14 -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 rounded-[100px] bg-zinc-100 pt-5">
                         <div className="flex gap-2.5">
-                            <div className="w-2 h-2 rounded-full bg-zinc-200" />
-                            <div className="w-2 h-2 rounded-full bg-zinc-200" />
+                            <div className="h-2 w-2 rounded-full bg-zinc-200" />
+                            <div className="h-2 w-2 rounded-full bg-zinc-200" />
                         </div>
-                        <div className="w-4 h-1 rounded-full bg-zinc-200" />
+                        <div className="h-1 w-4 rounded-full bg-zinc-200" />
                     </div>
 
                     {/* Scanning Beam */}
-                    <div className="absolute left-0 right-0 top-0 h-10 bg-gradient-to-b from-transparent to-violet-500/20 animate-scan">
+                    <div className="absolute left-0 right-0 top-0 h-10 animate-scan bg-gradient-to-b from-transparent to-violet-500/20">
                         <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-violet-500 shadow-[0_0_8px_2px_rgba(139,92,246,0.4)]" />
                     </div>
                 </div>
             </div>
 
-            <div className="mb-10 text-center w-full">
-                <h2 className="text-2xl font-extrabold tracking-tight text-zinc-900 mb-2">Preparation</h2>
-                <p className="text-sm text-zinc-500 leading-relaxed max-w-sm mx-auto">
+            <div className="mb-10 w-full text-center">
+                <h2 className="mb-2 text-2xl font-extrabold tracking-tight text-zinc-900">Preparation</h2>
+                <p className="mx-auto max-w-sm text-sm leading-relaxed text-zinc-500">
                     We will take {totalCaptures} clear photos to analyze your facial structure. The process is fully automated.
                 </p>
             </div>
 
-            <div className="flex flex-col gap-7 mb-10 w-full max-w-sm relative pl-2 sm:pl-4">
+            <div className="relative mb-10 flex w-full max-w-sm flex-col gap-7 pl-2 sm:pl-4">
                 {/* Vertical connecting line */}
-                <div className="absolute left-[31px] sm:left-[39px] top-6 bottom-6 w-[2px] bg-zinc-100 z-0" />
+                <div className="absolute bottom-6 left-[31px] top-6 z-0 w-[2px] bg-zinc-100 sm:left-[39px]" />
 
                 {PREP_STEPS.map((step, i) => (
-                    <div key={step.title} className="flex items-start gap-5 relative z-10 bg-white group">
-                        <div className="w-11 h-11 rounded-full bg-white border-2 border-zinc-100 flex items-center justify-center shrink-0 text-sm font-extrabold text-zinc-400 shadow-sm transition-colors group-hover:border-violet-200 group-hover:text-violet-600">
+                    <div key={step.title} className="group relative z-10 flex items-start gap-5 bg-white">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-zinc-100 bg-white text-sm font-extrabold text-zinc-400 shadow-sm transition-colors group-hover:border-violet-200 group-hover:text-violet-600">
                             {i + 1}
                         </div>
-                        <div className="flex flex-col justify-center min-h-[44px]">
-                            <span className="text-sm font-bold text-zinc-900 tracking-tight">{step.title}</span>
-                            <span className="text-xs text-zinc-500 mt-1 leading-relaxed">{step.desc}</span>
+                        <div className="flex min-h-[44px] flex-col justify-center">
+                            <span className="text-sm font-bold tracking-tight text-zinc-900">{step.title}</span>
+                            <span className="mt-1 text-xs leading-relaxed text-zinc-500">{step.desc}</span>
                         </div>
                     </div>
                 ))}
@@ -56,7 +56,7 @@ export default function GuidePage({ onStart, totalCaptures }: { onStart: () => v
 
             <div className="w-full max-w-sm">
                 <button
-                    className="w-full py-4 rounded-xl bg-violet-600 text-white text-sm font-bold tracking-tight shadow-xl shadow-violet-600/20 hover:bg-violet-700 hover:shadow-violet-600/30 active:scale-[0.98] transition-all"
+                    className="w-full rounded-xl bg-violet-600 py-4 text-sm font-bold tracking-tight text-white shadow-xl shadow-violet-600/20 transition-all hover:bg-violet-700 hover:shadow-violet-600/30 active:scale-[0.98]"
                     onClick={onStart}
                 >
                     I'm Ready →

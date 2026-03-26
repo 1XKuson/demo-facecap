@@ -3,12 +3,13 @@ import { FaceAutocapture, FaceStatus } from 'facecap';
 import type { CaptureResult } from 'facecap';
 import { pillClass } from '../../shared';
 import { ScanInfoPanel } from './ScanInfoPanel';
+import { formatDuration } from '../../utils/Timer';
 
 import type { AppConfig } from '../../config';
 
 export type ScanPhase = 'loading' | 'running' | 'done' | 'error';
 
-export default function ScanPage({ onComplete, config }: { onComplete: (r: CaptureResult[]) => void; config: AppConfig }) {
+export default function ScanPage({ onComplete, config, startTime }: { onComplete: (r: CaptureResult[]) => void; config: AppConfig; startTime?: number | null }) {
     const cameraRef = useRef<HTMLDivElement>(null);
     const captureRef = useRef<FaceAutocapture | null>(null);
     const resultsRef = useRef<CaptureResult[]>([]);
@@ -18,6 +19,18 @@ export default function ScanPage({ onComplete, config }: { onComplete: (r: Captu
     const [faceStatus, setFaceStatus] = useState(FaceStatus.READY);
     const [count, setCount] = useState(0);
     const [error, setError] = useState<string | null>(null);
+    const [elapsed, setElapsed] = useState(0);
+
+    // Timer effect
+    useEffect(() => {
+        if (!startTime || phase !== 'running') return;
+        
+        const interval = setInterval(() => {
+            setElapsed(Date.now() - startTime);
+        }, 100);
+        
+        return () => clearInterval(interval);
+    }, [startTime, phase]);
 
     const start = useCallback(async () => {
         if (!cameraRef.current) return;
@@ -84,6 +97,9 @@ export default function ScanPage({ onComplete, config }: { onComplete: (r: Captu
                 <div className="flex flex-col gap-3">
                     <div className="w-full bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xl shadow-zinc-200/50 relative">
                         <div className="aspect-[3/4] w-full bg-black relative overflow-hidden">
+                            <div className="absolute top-4 right-4 z-30 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-mono font-medium text-white">
+                                {formatDuration(elapsed)}
+                            </div>
                             <div ref={cameraRef} className="w-full h-full" />
 
                             {phase === 'loading' && (

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CaptureResult } from 'facecap';
 import AngleMeter from '../../components/AngleMeter';
+import { formatDuration } from '../../utils/Timer';
 
-
-export default function ResultsPage({ captures, onRetry, totalCaptures }: { captures: CaptureResult[]; onRetry: () => void; totalCaptures: number }) {
+export default function ResultsPage({ captures, onRetry, totalCaptures, duration }: { captures: CaptureResult[]; onRetry: () => void; totalCaptures: number; duration?: number }) {
     const [sel, setSel] = useState(0);
     const cur = captures[sel];
 
@@ -85,6 +85,7 @@ export default function ResultsPage({ captures, onRetry, totalCaptures }: { capt
                         <div className="flex flex-col gap-3">
                             {[
                                 { label: 'Photos taken', value: `${captures.length} / ${totalCaptures}` },
+                                { label: 'Duration', value: duration ? formatDuration(duration) : '-' },
                                 { label: 'Avg confidence', value: `${(captures.reduce((s, r) => s + r.detection.score, 0) / (captures.length || 1) * 100).toFixed(1)}%` },
                                 { label: 'Status', value: '✅ Passed' },
                             ].map(row => (
